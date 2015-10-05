@@ -129,66 +129,70 @@
 
 
 
-// //SKETCH 5: Arrays of objects
+//SKETCH 5: Arrays of objects
+
+var rings = []; // Declare the array of rings
+var numRings = 50;
+var currentRing = 0; 
+
+function setup() {
+  size(100, 100);
+  rings = new Ring[numRings]; // Create the array
+  for (var i = 0; i < rings.length; i++) {
+    rings[i] = new Ring(); // Create each object
+  }
+}
+
+function draw() {
+  background(0);
+  for (var i = 0; i < rings.length; i++) {
+    rings[i].grow();
+    rings[i].display();
+  }
+}
+// Click to create a new Ring
+function mousePressed() {
+  rings[currentRing].start(mouseX, mouseY);
+  currentRing++;
+  if (currentRing >= numRings) {
+    currentRing = 0;
+  }
+}
+
+//constructor function for the Ring object
+function Ring () {
+  
+  start: function(x,y) {
+      this.x: x,
+      this.y: y,
+      this.on: true, //turn the display on and off
+      this.diameter: 1
+  }
 
 
-// var rings = []; // Declare the array
-// var numRings = 50;
-// var currentRing = 0; 
+  grow: function() {
+    if (on == true) {
+      diameter += 0.5;
+        if (diameter > 400) {
+          on = false;
+        }
+    }
+  }
 
-// function setup() {
-//   size(100, 100);
-//   rings = new Ring[numRings]; // Create the array
-//   for (var i = 0; i < rings.length; i++) {
-//     rings[i] = new Ring(); // Create each object
-//   }
-// }
+  display: function(){
+    if (on == true) {
+      noFill();
+      strokeWeight(4);
+      stroke(155, 153);
+      ellipse(x, y, diameter, diameter);
+    }
+  }
 
-// function draw() {
-//   background(0);
-//   for (var i = 0; i < rings.length; i++) {
-//     rings[i].grow();
-//     rings[i].display();
-//   }
-// }
-// // Click to create a new Ring
-// function mousePressed() {
-//   rings[currentRing].start(mouseX, mouseY);
-//   currentRing++;
-//   if (currentRing >= numRings) {
-//     currentRing = 0;
-//   }
-// }
 
-// //constructor function for ring
-// class Ring {
-//  float x, y; // X-coordinate, y-coordinate
-//  float diameter; // Diameter of the ring
-//  boolean on = false; // Turns the display on and off
+}
 
-//  void start(float xpos, float ypos) {
-//  x = xpos;
-//  y = ypos;
-//  on = true;
-//  diameter = 1;
-//  }
-//  void grow() {
-//  if (on == true) {
-//  diameter += 0.5;
-//  if (diameter > 400) {
-//  on = false;
-//  }
-//  }
-//  }
-//  void display() {
-//  if (on == true) {
-//  noFill();
-//  strokeWeight(4);
-//  stroke(155, 153);
-//  ellipse(x, y, diameter, diameter);
-//  }
-//  }
-// }
+
+
 
 
 // //SKETCH 6: Two dimensional arrays
